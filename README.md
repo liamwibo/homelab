@@ -23,4 +23,4 @@ Go into the directory from the service you want to start and execute this comman
 ```
 docker compose up -d
 ```
-
+You should now see something like this `✔ Container "container name" Running`
