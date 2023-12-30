@@ -13,3 +13,7 @@ chmod +x ./run.sh
 ```
 sudo ./OpenWorldServer
 ```
+3 execute the script 
+```
+./run.sh
+```
