@@ -11,7 +11,7 @@ gh repo clone liamwibo/homelab-
 chmod +x ./run.sh
 ```
 ```
-sudo ./OpenWorldServer
+sudo ./run.sh
 ```
 3 execute the script 
 ```
