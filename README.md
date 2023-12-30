@@ -4,7 +4,5 @@ a simple script to automaticly set up a basic working services like nextcloud, h
 ## steps
 Some basic Git commands are:
 ```
-git status
-git add
-git commit
+test
 ```
