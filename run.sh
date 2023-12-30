@@ -5,9 +5,10 @@ apt upgrade
 
 
 #Install programs.
-apt install docker.io
-apt install curl
-apt install net-tools
+sudo apt install docker.io
+sudo apt install curl
+sudo apt install net-tools
+sudo apt install gh
 
 
 
@@ -20,4 +21,7 @@ chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 
 
 #Setup docker compose files. 
-mkdir ~/docker
+sudo mkdir ~/docker
+mv nextcloud ~/docker
+mv homeassistant ~/docker
+mv code-server ~/docker
