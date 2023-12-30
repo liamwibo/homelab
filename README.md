@@ -18,7 +18,7 @@ sudo ./run.sh
 ./run.sh
 ```
 Now you should have 3 filles in your ~ root directory.
-##Spinning up the containers.
+## Spinning up the containers.
 Go into the directory from the service you want to start and execute this command.
 ```
 docker compose up -d
