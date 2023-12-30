@@ -6,3 +6,7 @@ a simple script to automaticly set up a basic working services like nextcloud, h
 ```
 gh repo clone liamwibo/homelab-
 ```
+2 If it gives you the "Permission denied" error use either of these commands:
+```
+chmod +x ./run.sh
+```
