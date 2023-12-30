@@ -8,7 +8,6 @@ apt upgrade
 sudo apt install docker.io
 sudo apt install curl
 sudo apt install net-tools
-sudo apt install gh
 
 
 
