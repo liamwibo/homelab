@@ -1,5 +1,5 @@
 # homelab
-## Note this guide is made for ubuntu 20.04.
+### Note this guide is made for ubuntu 20.04.
 ## Description
 a simple script to automaticly set up a `basic` working services like nextcloud, homeassistant and code-server.
 ## steps
