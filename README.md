@@ -5,7 +5,7 @@ a simple script to automaticly set up a `basic` working services like nextcloud,
 ## steps
 1 Clone this repo in your home directory.
 ```
-gh repo clone liamwibo/homelab-
+gh repo clone liamwibo/homelab
 ```
 2 If it gives you the "Permission denied" error use either of these commands.
 ```
