@@ -7,6 +7,7 @@ apt upgrade
 #Install programs.
 sudo apt install curl
 sudo apt install net-tools
+sudo apt install docker.io
 sudo apt install docker-compose
 
 
