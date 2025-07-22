@@ -7,4 +7,4 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.hostname == docker test dit breekt het
+          - node.hostname == docker test dit breekt het test nog is
