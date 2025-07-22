@@ -26,4 +26,4 @@ services:
           - node.hostname == docker
 
 volumes:
-  homeassistant-config
+  homeassistant-config:
