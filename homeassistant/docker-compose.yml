@@ -11,3 +11,6 @@ services:
       placement:
         constraints:
           - node.hostname == docker
+
+volumes:
+  homeassistant-config:
