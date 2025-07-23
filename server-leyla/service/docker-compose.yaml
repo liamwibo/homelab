@@ -7,4 +7,4 @@ services:
     volumes:
       - ./html5up-stellar/:/usr/share/nginx/html
 
-#modify
+#odify
