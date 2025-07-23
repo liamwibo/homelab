@@ -11,4 +11,4 @@ services:
       - /opt/appdata/config/jellyfin:/config
       - /mnt/storage/data/media/tv:/data/tvshows
       - /mnt/storage/data/media/movies:/data/movies
-    restart: unless-stopped
+    restart: unless-stoppe
