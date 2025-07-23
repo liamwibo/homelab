@@ -1,29 +1,10 @@
 services:
   homeassistant:
-    image: ghcr.io/home-assistant/home-assistant:stable
-    restart: unless-stopped
-    ports:
-      - 8123
+    container_name: homeassistant
+    image: 'ghcr.io/home-assistant/home-assistant:stable'
     volumes:
-      - ../files/configuration.yaml:/config/configuration.yaml
-      - ../files/automations.yaml:/config/automations.yaml
-      - ../files/scripts.yaml:/config/scripts.yaml
-      - ../files/scenes.yaml:/config/scenes.yaml
-      -   homeassistant-config:/config
-      - /etc/localtime:/etc/localtime:ro
-      - /run/dbus:/run/dbus:ro
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://homeassistant:8123/"]
-      interval: 60s
-      retries: 5
-      start_period: 300s
-      timeout: 2s
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.hostname == docker
-
-volumes:
-  homeassistant-config:
+      - '/opt/appdata/config/homeassistant:/config'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/run/dbus:/run/dbus:ro'
+    restart: unless-stopped
+    privileged: true
