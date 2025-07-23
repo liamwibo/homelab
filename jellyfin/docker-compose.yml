@@ -13,4 +13,4 @@ services:
       - /mnt/storage/data/media/movies:/data/movies
     ports:
       - 8096:8096
-    restart: unless-stopped
+    restart: unless-stoppeddwdwd
