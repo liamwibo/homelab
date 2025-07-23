@@ -6,5 +6,5 @@ services:
       - '/opt/appdata/config/homeassistant:/config'
       - '/etc/localtime:/etc/localtime:ro'
       - '/run/dbus:/run/dbus:ro'
-    restart: unless-stoppedwd
+    restart: unless-stoppedwddwad
     privileged: true
