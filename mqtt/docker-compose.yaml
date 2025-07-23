@@ -1,3 +1,4 @@
+#mqtt
 services:
   mosquitto:
     image: eclipse-mosquitto
