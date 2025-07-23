@@ -11,4 +11,6 @@ services:
       - /opt/appdata/config/jellyfin:/config
       - /mnt/storage/data/media/tv:/data/tvshows
       - /mnt/storage/data/media/movies:/data/movies
+    ports:
+      - 8096:8096
     restart: unless-stopped
