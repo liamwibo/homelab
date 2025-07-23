@@ -1,6 +1,6 @@
 services:
   cloudflared:
-    container_name: cloudflare-tunnel
+    container_name: cloudflare-tunnel-test
     image: 'cloudflare/cloudflared:latest'
     restart: unless-stopped
     network_mode: host
