@@ -21,3 +21,7 @@ services:
     labels:
       - traefik.tcp.routers.mqtt.entrypoints=mqtt
       - traefik.tcp.routers.mqtts.entrypoints=mqtts
+
+volume:
+  mosquitto-config:
+  mosquitto-certs:
