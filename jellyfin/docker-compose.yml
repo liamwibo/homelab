@@ -1,16 +1,14 @@
+---
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
     volumes:
       - /opt/appdata/config/jellyfin:/config
-      - /opt/appdata/data/jellyfin:/cache
-      - type: bind
-        source: /mnt/storage/data/media/movies/
-        target: /movies
-      - type: bind
-        source: /mnt/storage/data/media/tv/
-        target: /tv
-        read_only: true
-    restart: 'unless-stopped'
-    environment:
-      - JELLYFIN_PublishedServerUrl=http://jellyfin.15092006.xyz
+      - /mnt/storage/data/media/tv:/data/tvshows
+      - /mnt/storage/data/media/movies:/data/movies
+    restart: unless-stopped
