@@ -1,0 +1,16 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    volumes:
+      - to/config:/config
+      - /path/to/cache:/cache
+      - type: bind
+        source: /mnt/storage/data/media/movies/
+        target: /movies
+      - type: bind
+        source: /mnt/storage/data/media/tv/
+        target: /tv
+        read_only: true
+    restart: 'unless-stopped'
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://jellyfin.15092006.xyz
