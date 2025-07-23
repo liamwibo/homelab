@@ -2,8 +2,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     volumes:
-      - to/config:/config
-      - /path/to/cache:/cache
+      - /opt/appdata/config/jellyfin:/config
+      - /opt/appdata/data/jellyfin:/cache
       - type: bind
         source: /mnt/storage/data/media/movies/
         target: /movies
