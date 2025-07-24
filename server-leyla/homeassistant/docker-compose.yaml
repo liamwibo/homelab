@@ -7,7 +7,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     networks:
-      - caddy:
+      - caddy
     restart: unless-stopped
     labels:
       caddy: hoass.15092006.xyz
