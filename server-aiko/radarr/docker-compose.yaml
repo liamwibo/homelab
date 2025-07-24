@@ -4,6 +4,8 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     environment:
       - TZ=Europe/Brussels
+    ports:
+      - 7878:7878
     volumes:
       - /opt/appdata/config/radarr:/config
       - /opt/appdata/data/media
