@@ -4,7 +4,7 @@ services:
     volumes:
      - /opt/appdata/config/bitwarden:/data:rw
     environment:
-     - WEBSOCKET_ENABLED=true
+     - WEBSOCKET_ENABLED=false
      - SIGNUPS_ALLOWED=true
      - DOMAIN=https://bitwarden.15092006.xyz
     networks:
