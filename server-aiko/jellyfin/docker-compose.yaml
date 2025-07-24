@@ -3,6 +3,8 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Brussels
     volumes:
       - /opt/appdata/config/jellyfin:/config
