@@ -8,7 +8,7 @@ services:
       - 7878:7878
     volumes:
       - /opt/appdata/config/radarr:/config
-      - /vault/data:/media
+      - /vault/data:/data
     networks:
       - arr
     deploy:
