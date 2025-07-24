@@ -1,0 +1,18 @@
+---
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+      - TZ=Europe/Brussels
+    volumes:
+      - /opt/appdata/config/radarr:/config
+      - /opt/appdata/data/media
+    networks:
+      - arr
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == aiko
+
+networks:
+  arr:
+    external: true
