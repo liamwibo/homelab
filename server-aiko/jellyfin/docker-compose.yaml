@@ -6,8 +6,8 @@ services:
       - TZ=Europe/Brussels
     volumes:
       - /opt/appdata/config/jellyfin:/config
-      - /opt/appdata/data/media/tv:/data/tvshows
-      - /opt/appdata/data/media/movies:/data/movies
+      - /vault/data/media/tv:/data/tvshows
+      - /vault/data/media/movies:/data/movies
     restart: unless-stopped
     networks:
       - caddy
