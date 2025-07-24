@@ -20,8 +20,8 @@ services:
         reservations:
           generic_resources:
             - discrete_resource_spec:
-              kind: "NVIDIA-GPU"
-              value: 1
+                kind: 'NVIDIA-GPU'
+                value: 1
       labels:
         caddy: http://jellyfin.15092006.xyz
         caddy.reverse_proxy: "{{upstreams 8096}}"
