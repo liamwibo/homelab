@@ -1,17 +1,19 @@
 services:
   homeassistant:
-    container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: homeassistant/home-assistant
     volumes:
       - /opt/appdata/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
-      - /run/dbus:/run/dbus:ro
+    deploy:
+      labels:
+        caddy: "http://hoass.15092006.xyz"
+        caddy.reverse_proxy: "{{upstreams 8123}}"
+      placement:
+        constraints:
+          - node.id == skj29y6jys8i384s6z5j7mo8t
+      replicas: 1
     networks:
       - caddy
-    restart: unless-stopped
-    labels:
-      caddy: hoass.15092006.xyz
-      caddy.reverse_proxy: "{{upstreams 8123}}"
 
 networks:
   caddy:
