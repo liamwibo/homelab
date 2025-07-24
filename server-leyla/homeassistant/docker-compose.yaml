@@ -12,7 +12,6 @@ services:
     labels:
       caddy: hoass.15092006.xyz
       caddy.reverse_proxy: "{{upstreams 8123}}"
-    privileged: true
 
 networks:
   caddy:
