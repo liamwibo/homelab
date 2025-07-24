@@ -6,6 +6,15 @@ services:
       - /opt/appdata/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
+    networks:
+      - caddy:
     restart: unless-stopped
+    labels:
+      caddy: hoass.15092006.xyz
+      caddy.reverse_proxy: "{{upstreams 8123}}"
     privileged: true
     network_mode: host
+
+    networks:
+      caddy:
+        external: true
