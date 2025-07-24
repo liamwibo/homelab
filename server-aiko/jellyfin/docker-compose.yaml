@@ -10,7 +10,6 @@ services:
       - /opt/appdata/config/jellyfin:/config
       - /vault/data/media/tv:/data/tvshows
       - /vault/data/media/movies:/data/movies
-    restart: unless-stopped
     networks:
       - caddy
     deploy:
