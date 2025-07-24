@@ -1,0 +1,16 @@
+services:
+  cloudflared:
+    image: 'cloudflare/cloudflared:latest'
+    networks:
+      - caddy
+    command: 'tunnel --no-autoupdate run'
+    environment:
+      - 'TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}'
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == leyla
+
+networks:
+  caddy:
+    external: true

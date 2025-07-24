@@ -1,0 +1,21 @@
+services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    networks:
+      - caddy
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == leyla
+
+volumes:
+  caddy_data: {}
+
+networks:
+  caddy:
+    external: true

@@ -1,0 +1,30 @@
+services:
+  n8n:
+    stdin_open: true
+    container_name: n8n
+    hostname: n8n
+    tty: true
+    volumes:
+      - n8n_data:/home/node/.n8n
+    image: docker.n8n.io/n8nio/n8n
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - N8N_HOST=n8n.15092006.xyz
+      - WEBHOOK_URL=https://n8n.15092006.xyz/
+    networks:
+      - caddy
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == leyla
+      labels:
+        caddy: http://n8n.15092006.xyz
+        caddy.reverse_proxy: "{{upstreams 5678}}"
+          
+volumes:
+    n8n_data:
+        external: true
+        name: n8n_data
+networks:
+  caddy:
+    external: true
