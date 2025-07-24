@@ -1,4 +1,5 @@
----
+version: '3.8'
+
 services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -6,6 +7,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Brussels
+      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /opt/appdata/config/jellyfin:/config
       - /vault/data/media/tv:/data/tvshows
@@ -16,6 +18,12 @@ services:
       placement:
         constraints:
           - node.hostname == aiko
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
       labels:
         caddy: http://jellyfin.15092006.xyz
         caddy.reverse_proxy: "{{upstreams 8096}}"
