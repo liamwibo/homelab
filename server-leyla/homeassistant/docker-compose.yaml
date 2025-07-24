@@ -10,8 +10,7 @@ services:
         caddy.reverse_proxy: "{{upstreams 8123}}"
       placement:
         constraints:
-          - node.id == skj29y6jys8i384s6z5j7mo8t
-      replicas: 1
+          - node.hostname == leyla
     networks:
       - caddy
 
