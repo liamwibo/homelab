@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -20,10 +18,10 @@ services:
           - node.hostname == aiko
       resources:
         reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+          generic_resources:
+            - discrete_resource_spec:
+                kind: 'NVIDIA-GPU'
+                value: 1
       labels:
         caddy: http://jellyfin.15092006.xyz
         caddy.reverse_proxy: "{{upstreams 8096}}"
