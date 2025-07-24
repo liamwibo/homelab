@@ -1,0 +1,22 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    volumes:
+     - /opt/appdata/config/bitwarden:/data:rw
+    environment:
+     - WEBSOCKET_ENABLED=true
+     - SIGNUPS_ALLOWED=false
+     - DOMAIN=https://bitwarden.15092006.xyz
+    networks:
+      - caddy
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == leyla
+      labels:
+        caddy: http://bitwarden.15092006.xyz
+        caddy.reverse_proxy: "{{upstreams 80}}"
+
+networks:
+  caddy:
+    external: true
