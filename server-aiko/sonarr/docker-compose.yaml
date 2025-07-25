@@ -1,0 +1,21 @@
+services:
+  sonarr:
+    container_name: sonarr
+    image: ghcr.io/hotio/sonarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/appdata/config/sonarr:/config
+      - /vault/data:/data
+    networks:
+      - arr
+
+networks:
+  arr:
+    external: true
