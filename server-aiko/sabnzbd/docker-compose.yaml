@@ -14,7 +14,7 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/sabnzbd:/config
+      - /opt/appdata//config/sabnzbd:/config
       - /vault/data/usenet:/data/usenet:rw
     networks:
       - arr
