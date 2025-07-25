@@ -12,19 +12,7 @@ services:
       - /vault/data/media/movies:/data/movies
     networks:
       - caddy
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == aiko
-      resources:
-        reservations:
-          generic_resources:
-            - discrete_resource_spec:
-                kind: 'NVIDIA-GPU'
-                value: 1
-      labels:
-        caddy: http://jellyfin.15092006.xyz
-        caddy.reverse_proxy: "{{upstreams 8096}}"
+
 
 networks:
   caddy:
