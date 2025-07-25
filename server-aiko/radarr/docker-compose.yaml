@@ -15,3 +15,7 @@ services:
       - /vault/data:/data
     networks:
       - arr
+
+networks:
+  arr:
+    external: true
