@@ -1,24 +1,26 @@
 services:
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
+    image: jellyfin/jellyfin
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Brussels
-      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /opt/appdata/config/jellyfin:/config
       - /vault/data/media/tv:/data/tvshows
       - /vault/data/media/movies:/data/movies
     networks:
       - caddy
+    runtime: nvidia
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: 1
+              count: all
               capabilities: [gpu]
+
+
 
 
 networks:
