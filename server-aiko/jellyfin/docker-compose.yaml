@@ -12,6 +12,13 @@ services:
       - /vault/data/media/movies:/data/movies
     networks:
       - caddy
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
 
 networks:

@@ -12,20 +12,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Amsterdam
-      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /opt/appdata//config/sabnzbd:/config
       - /vault/data/usenet:/data/usenet:rw
     networks:
       - arr
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
 networks:
   arr:
     external: true
