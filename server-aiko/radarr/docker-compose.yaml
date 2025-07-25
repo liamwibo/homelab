@@ -1,21 +1,17 @@
----
 services:
   radarr:
-    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    image: ghcr.io/hotio/radarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
     environment:
-      - TZ=Europe/Brussels
-    ports:
-      - 7878:7878
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /opt/appdata/config/radarr:/config
       - /vault/data:/data
     networks:
       - arr
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == aiko
-
-networks:
-  arr:
-    external: true
