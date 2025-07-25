@@ -9,6 +9,8 @@ services:
       - /opt/appdata/config/jellyfin:/config
       - /vault/data/media/tv:/data/tvshows
       - /vault/data/media/movies:/data/movies
+    ports:
+      - 8096:8096
     networks:
       - caddy
     runtime: nvidia
