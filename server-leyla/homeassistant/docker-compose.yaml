@@ -4,13 +4,6 @@ services:
     volumes:
       - /opt/appdata/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
-    deploy:
-      labels:
-        caddy: "http://hoass.15092006.xyz"
-        caddy.reverse_proxy: "{{upstreams 8123}}"
-      placement:
-        constraints:
-          - node.hostname == leyla
     networks:
       - caddy
 
