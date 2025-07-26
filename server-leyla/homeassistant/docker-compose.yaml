@@ -6,7 +6,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
     networks:
       - caddy
-
+      - homeassistant
 networks:
   caddy:
+    external: true
+  homeassistant:
     external: true

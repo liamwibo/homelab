@@ -1,0 +1,18 @@
+
+services:
+  mqtt5:
+    image: eclipse-mosquitto
+    container_name: mqtt5
+    ports:
+      - "1883:1883" #default mqtt port
+      - "9001:9001" #default mqtt port for websockets
+    volumes:
+      - /opt/appdata/config/mqtt:/mosquitto/config:rw
+      - /opt/appdata/data/mqtt:/mosquitto/data:rw
+    restart: unless-stopped
+    networks:
+      - homeassistant
+
+networks:
+  homeassistant:
+    external: true
