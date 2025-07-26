@@ -13,4 +13,3 @@ networks:
   homeassistant:
     external: true
 
-#fix
