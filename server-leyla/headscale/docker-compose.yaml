@@ -11,8 +11,8 @@ services:
       - /opt/appdata/data/headscale/lib:/var/lib/headscale
       - /opt/appdata/data/headscale/lib/run:/var/run/headscale
     command: serve
-  networks:
-    - caddy
+    networks:
+      - caddy
 
 networks:
   caddy:
