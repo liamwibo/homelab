@@ -12,6 +12,8 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
   headscale:
     image: headscale/headscale:latest
+    networks:
+      - caddy
     container_name: headscale
     restart: unless-stopped
     command: serve
@@ -20,3 +22,7 @@ services:
     volumes:
       - '/opt/appdata/data/headscale:/var/lib/headscale'
       - '/opt/appdata/config/headscale:/etc/headscale'
+
+networks:
+  caddy:
+    external: true
