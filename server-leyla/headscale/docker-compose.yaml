@@ -3,9 +3,6 @@ services:
     image: docker.io/headscale/headscale:latest
     restart: unless-stopped
     container_name: headscale
-    ports:
-      - "127.0.0.1:8083:8080"
-      - "127.0.0.1:9093:9090"
     volumes:
       - /opt/appdata/config/headscale:/etc/headscale
       - /opt/appdata/data/headscale/lib:/var/lib/headscale
