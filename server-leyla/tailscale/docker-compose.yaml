@@ -16,3 +16,4 @@ services:
       - TS_NO_LOGS_NO_SUPPORT=true
       - TS_AUTHKEY=91e7c09029759336638fc8871e332698bf4fa00f7bb6886b
     restart: unless-stopped
+#test
