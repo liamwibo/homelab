@@ -3,6 +3,7 @@ services:
     stdin_open: true
     container_name: n8n
     hostname: n8n
+    restart: unless-stopped
     tty: true
     volumes:
       - n8n_data:/home/node/.n8n
