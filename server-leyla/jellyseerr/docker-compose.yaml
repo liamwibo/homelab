@@ -1,0 +1,19 @@
+---
+services:
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+    networks:
+      - caddy
+      - LOG_LEVEL=debug
+      - TZ=Europe/Brussels
+    ports:
+      - 5055:5055
+    volumes:
+      - /opt/appdata/config/jellyseerr:/app/config
+    restart: unless-stopped
+
+networks:
+  caddy:
+    external: true
