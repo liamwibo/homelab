@@ -8,6 +8,7 @@ services:
       - TZ=Europe/Brussels    
     networks:
       - caddy
+      - arr
     ports:
       - 5055:5055
     volumes:
@@ -16,4 +17,6 @@ services:
 
 networks:
   caddy:
+    external: true
+  arr:
     external: true
