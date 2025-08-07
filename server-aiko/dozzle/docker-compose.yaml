@@ -1,9 +1,21 @@
 services:
-  dozzle-agent:
+  dozzle:
+    container_name: dozzle
     image: amir20/dozzle:latest
     restart: unless-stopped
     command: agent
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 7007:7007
+    environment:
+      - <VARIABEL_NAAM>=<waarde>
+      - <ANDERE_VARIABEL>=<waarde>
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - <netwerk_naam>
+    depends_on:
+      - <andere_service_naam>
+
+networks:
+  caddy:
+    external: true
