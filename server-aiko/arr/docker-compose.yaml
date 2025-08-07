@@ -57,7 +57,7 @@ services:
 
   recyclarr:
     container_name: recyclarr
-    image: ghcr.io/hotio/recyclarr:latest
+    image: ghcr.io/recyclarr/recyclarr
     restart: unless-stopped
     environment:
       - PUID=1000
