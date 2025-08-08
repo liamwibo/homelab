@@ -6,15 +6,8 @@ services:
     command: agent
     ports:
       - 7007:7007
-    environment:
-      - <VARIABEL_NAAM>=<waarde>
-      - <ANDERE_VARIABEL>=<waarde>
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - <netwerk_naam>
-    depends_on:
-      - <andere_service_naam>
 
 networks:
   caddy:
