@@ -1,0 +1,56 @@
+services:
+  tailscale:
+    container_name: tailscale
+    image: tailscale/tailscale:stable
+    restart: unless-stopped
+    ports:
+      - 7007:7007
+    environment:
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--login-server=https://headscale.15092006.xyz --advertise-exit-node --advertise-routes=192.168.50.0/24 --accept-dns=true
+      - TS_NO_LOGS_NO_SUPPORT=true
+      - TS_AUTHKEY=91e7c09029759336638fc8871e332698bf4fa00f7bb6886b
+    volumes:
+      - /opt/appdata/config/tailscale:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+  headscale:
+    container_name: headscale
+    image: headscale/headscale:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+      - 9090:9090
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+    volumes:
+      - /opt/appdata/data/headscale:/var/lib/headscale
+      - /opt/appdata/config/headscale:/etc/headscale
+    networks:
+      - caddy
+    command: serve
+    labels:
+      me.tale.headplane.target: headscale
+
+  headplane:
+    container_name: headplane
+    image: ghcr.io/tale/headplane:latest
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - '/opt/appdata/config/headplane/config.yaml:/etc/headplane/config.yaml'
+      - '/opt/appdata/config/headscale/config.yaml:/etc/headscale/config.yaml'
+      - '/opt/appdata/data/headplane:/var/lib/headplane'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+
+
+networks:
+  caddy:
+    external: true
