@@ -22,6 +22,23 @@ services:
               count: all
               capabilities: [gpu]
 
+  jellyseerr:
+    container_name: jellyseerr
+    image: fallenbagel/jellyseerr:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Brussels
+    volumes:
+      - /opt/appdata/config/jellyseerr:/app/config
+    networks:
+      - arr
+      - caddy
+    depends_on:
+      - jellyfin
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+
 networks:
   caddy:
     external: true
