@@ -1,21 +1,19 @@
 services:
   caddy:
-    image: lucaslorentz/caddy-docker-proxy:ci-alpine
-    networks:
-      - caddy
-    environment:
-      - CADDY_INGRESS_NETWORKS=caddy
+    image: caddy:alpine
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/appdata/config/caddy:/etc/caddy
+      - /opt/appdata/data/caddy/site:/srv
       - caddy_data:/data
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == leyla
+      - caddy_config:/config
 
 volumes:
-  caddy_data: {}
-
-networks:
-  caddy:
-    external: true
+  caddy_data:
+  caddy_config:
