@@ -8,6 +8,8 @@ services:
       - PGID=1000
       - TZ=Europe/Brussels
       - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - 8096:8096
     volumes:
       - /opt/appdata/config/jellyfin:/config
       - /vault/data/media/tv:/data/tvshows
