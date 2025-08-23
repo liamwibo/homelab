@@ -25,6 +25,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Brussels
+    ports:
+      - 5055:5055
     volumes:
       - /opt/appdata/config/jellyseerr:/app/config
     networks:
