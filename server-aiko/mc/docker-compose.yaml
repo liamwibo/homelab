@@ -11,5 +11,6 @@ services:
       VERSION: "1.20.1"
       UID: "1000"
       GID: "1000"
+      MEMORY: "6G"
     volumes:
       - /opt/appdata/data/minecraft:/data
