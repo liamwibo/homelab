@@ -3,7 +3,6 @@ services:
   homeassistant:
     image: linuxserver/homeassistant:latest
     container_name: homeassistant
-    network_mode: host
     restart: unless-stopped    
     environment:
       - PUID=1000
