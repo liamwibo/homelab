@@ -11,6 +11,14 @@ services:
       - TZ=Europe/Brussels
     volumes:
       - ./data:/config
+    labels:
+      - "komodo.skip"
+      - "traefik.enable=true"
+      - "traefik.http.routers.komodo.rule=Host(`komodo.02082004.xyz`)"
+      - "traefik.http.routers.komodo.entrypoints=websecure"
+      - "traefik.http.routers.komodo.tls=true"
+      - "traefik.http.routers.komodo.tls.certresolver=letencrypt"
+      - "traefik.http.services.komodo.loadbalancer.server.port=9120"
     deploy:
       resources:
         limits:
