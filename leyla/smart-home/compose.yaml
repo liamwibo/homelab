@@ -27,3 +27,4 @@ services:
 
 networks:
   frontend:
+    external: true
