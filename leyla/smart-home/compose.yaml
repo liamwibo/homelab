@@ -12,13 +12,12 @@ services:
     volumes:
       - ./data:/config
     labels:
-      - "komodo.skip"
       - "traefik.enable=true"
-      - "traefik.http.routers.komodo.rule=Host(`komodo.02082004.xyz`)"
-      - "traefik.http.routers.komodo.entrypoints=websecure"
-      - "traefik.http.routers.komodo.tls=true"
-      - "traefik.http.routers.komodo.tls.certresolver=letencrypt"
-      - "traefik.http.services.komodo.loadbalancer.server.port=9120"
+      - "traefik.http.routers.homeassistant.rule=Host(`hoass.02082004.xyz`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls=true"
+      - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
+      - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
     deploy:
       resources:
         limits:
