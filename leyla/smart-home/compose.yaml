@@ -12,6 +12,7 @@ services:
       - TZ=Europe/Brussels
     volumes:
       - ./data:/config
+      - ./config/configuration.yaml:/config/configuration.yaml
     networks:
       - frontend
     labels:
