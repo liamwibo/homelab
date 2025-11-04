@@ -3,7 +3,9 @@ services:
   homeassistant:
     image: linuxserver/homeassistant:latest
     container_name: homeassistant
-    restart: unless-stopped    
+    restart: unless-stopped
+    ports:
+      - 8123:8123
     environment:
       - PUID=1000
       - PGID=1000
