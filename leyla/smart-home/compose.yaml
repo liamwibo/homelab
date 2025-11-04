@@ -11,6 +11,8 @@ services:
       - TZ=Europe/Brussels
     volumes:
       - ./data:/config
+    networks:
+      - frontend
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homeassistant.rule=Host(`hoass.02082004.xyz`)"
@@ -23,3 +25,6 @@ services:
         limits:
           cpus: '0.5'
           memory: 500M
+
+networks:
+  frontend:
