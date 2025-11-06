@@ -11,8 +11,7 @@ services:
       - PGID=1000
       - TZ=Europe/Brussels
     volumes:
-      - ./data:/config
-      - ./config/configuration.yaml:/config/configuration.yaml
+      - /opt/stacks/config/homeassistant:/config
     networks:
       - frontend
     labels:
