@@ -48,3 +48,14 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sabnzbd:/config
       - /pool/data/usenet:/data/usenet:rw
+
+  profilarr:
+    image: santiagosayshey/profilarr:latest # Use :beta for early access to new features
+    container_name: profilarr
+    ports:
+        - 6868:6868
+    volumes:
+        - /opt/stacks/profilarr/config:/config # Replace with your actual path
+    environment:
+        - TZ=Europe/Brussels # Set your timezone
+    restart: unless-stopped
