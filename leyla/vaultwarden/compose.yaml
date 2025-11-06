@@ -18,8 +18,8 @@ services:
       - LOG_LEVEL=error
       - EXTENDED_LOGGING=true
     volumes:
-      - ${DOCKER_VOLUME_STORAGE:-/mnt/docker-volumes}/vaultwarden/data:/data
-      - ${DOCKER_VOLUME_STORAGE:-/mnt/docker-volumes}/vaultwarden/logs:/data/logs      
+      - /opt/stacks/config/vaultwarden/data:/data
+      - /opt/stacks/config/vaultwarden/logs:/data/logs      
     networks:
      - frontend
     labels:
