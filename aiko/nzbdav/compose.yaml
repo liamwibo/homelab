@@ -10,7 +10,15 @@ services:
       - /opt/stacks/nzbdav/config:/config
     restart: unless-stopped
 
-
+  ubuntu:
+    image: ubuntu
+    command: sleep infinity
+    volumes:
+      - nzbdav:/mnt/nzbdav
+    environment:
+      - PUID=1000
+      - PGID=1000
+      
 volumes:
   nzbdav:
     driver: rclone
