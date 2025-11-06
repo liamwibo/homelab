@@ -31,3 +31,20 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sonarr:/config
       - /pool/data:/data
+  sabnzbd:
+    container_name: sabnzbd
+    image: ghcr.io/hotio/sabnzbd:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - 8080:8080
+      - 9090:9090
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/sabnzbd:/config
+      - /pool/data/usenet:/data/usenet:rw
