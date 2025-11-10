@@ -11,7 +11,6 @@ services:
       - 'MONGO_CONNECTION=mongodb://admin:${DB_PASS}@database/admin'
       - PORT=1337
     links:
-      - broker
       - database
     ports:
       - '1337:1337'
