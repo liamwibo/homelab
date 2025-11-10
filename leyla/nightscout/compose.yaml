@@ -1,8 +1,12 @@
 services:
   database:
-    image: 'tutum/mongodb:latest'
+    image: mongo:6.0
+    restart: always
     environment:
-      - MONGODB_PASS=${DB_PASS}
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+    volumes:
+      - /opt/stacks/nightscout/db/:/data/db  # optioneel: sla data lokaal op
 
   nightscout:
     image: 'nightscout/cgm-remote-monitor-development:latest'
