@@ -18,3 +18,8 @@ services:
       - database
     ports:
       - '1337:1337'
+
+  dexcom:
+    image: nightscout/cgm-remote-monitor:latest
+    environment:
+      - API_SECRET=${API_SECRET}
