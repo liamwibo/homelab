@@ -14,7 +14,7 @@ services:
     restart: always
     environment:
       - API_SECRET=${API_SECRET}
-      - BRIDGE_USER_NAME=liamkelleher2006@gmail.com
+      - BRIDGE_USER_NAME=${DEXCOM_EMAIL}
       - BRIDGE_PASSWORD=${DEXCOM_PASS}
       - BRIDGE_SERVER=EU
       - UNITS=mg/dl
