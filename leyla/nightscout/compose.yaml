@@ -8,16 +8,16 @@ services:
     volumes:
       - /opt/stacks/nightscout/db/:/data/db  # optioneel: sla data lokaal op
 
-  nightscout:
-    image: 'nightscout/cgm-remote-monitor-development:latest'
-    environment:
-      - API_SECRET=${API_SECRET}
-      - 'MONGO_CONNECTION=mongodb://admin:${DB_PASS}@database/admin'
-      - PORT=1337
-    links:
-      - database
-    ports:
-      - '1337:1337'
+  # nightscout:
+  #   image: 'nightscout/cgm-remote-monitor-development:latest'
+  #   environment:
+  #     - API_SECRET=${API_SECRET}
+  #     - 'MONGO_CONNECTION=mongodb://admin:${DB_PASS}@database/admin'
+  #     - PORT=1337
+  #   links:
+  #     - database
+  #   ports:
+  #     - '1337:1337'
 
   dexcom:
     image: nightscout/cgm-remote-monitor:latest
@@ -25,3 +25,5 @@ services:
       - API_SECRET=${API_SECRET}
       - BRIDGE_USER_NAME=liamkelleher2006@gmail.com
       - BRIGE_PASSWORD=Liamwibo/123
+      - 'MONGO_CONNECTION=mongodb://admin:${DB_PASS}@database/admin'
+      - PORT=1337
