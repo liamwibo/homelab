@@ -1,16 +1,17 @@
-database:
-  image: 'tutum/mongodb:latest'
-  environment:
-    - MONGODB_PASS=${DB_PASS}
+services:
+  database:
+    image: 'tutum/mongodb:latest'
+    environment:
+      - MONGODB_PASS=${DB_PASS}
 
-nightscout:
-  image: 'nightscout/cgm-remote-monitor-development:latest'
-  environment:
-    - API_SECRET=${API_SECRET}
-    - 'MONGO_CONNECTION=mongodb://admin:${DB_PASS}@database/admin'
-    - PORT=1337
-  links:
-    - broker
-    - database
-  ports:
-    - '1337:1337'
+  nightscout:
+    image: 'nightscout/cgm-remote-monitor-development:latest'
+    environment:
+      - API_SECRET=${API_SECRET}
+      - 'MONGO_CONNECTION=mongodb://admin:${DB_PASS}@database/admin'
+      - PORT=1337
+    links:
+      - broker
+      - database
+    ports:
+      - '1337:1337'
