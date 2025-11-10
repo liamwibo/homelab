@@ -23,3 +23,5 @@ services:
     image: nightscout/cgm-remote-monitor:latest
     environment:
       - API_SECRET=${API_SECRET}
+      - BRIDGE_USER_NAME=liamkelleher2006@gmail.com
+      - BRIGE_PASSWORD=Liamwibo/123
