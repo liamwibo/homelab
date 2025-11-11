@@ -78,7 +78,7 @@ services:
       - "traefik.http.routers.jellyseerr.entrypoints=websecure"
       - "traefik.http.routers.jellyseerr.tls=true"
       - "traefik.http.routers.jellyseerr.tls.certresolver=letencrypt"
-      - "traefik.http.services.jellyseerr.loadbalancer.server.port=8096"
+      - "traefik.http.services.jellyseerr.loadbalancer.server.port=5055"
     restart: unless-stopped
 
 networks:
