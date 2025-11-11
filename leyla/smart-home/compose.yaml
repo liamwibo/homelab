@@ -12,5 +12,30 @@ services:
       retries: 5
       start_period: 300s
       timeout: 2s
-volumes:
-  ha-config:          # wordt aangemaakt door Docker
+
+
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    ports:
+      - "1883:1883" #default mqtt port
+      - "9001:9001" #default mqtt port for websockets
+    volumes:
+      - /opt/stacks/mqtt/config:/mosquitto/config:rw
+      -  /opt/stacks/mqtt/data:/mosquitto/data:rw
+      -  /opt/stacks/mqtt/log:/mosquitto/log:rw
+    restart: unless-stopped
+
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: ghcr.io/koenkk/zigbee2mqtt
+    restart: unless-stopped
+    volumes:
+        - /opt/stacks/config/zigbee2mqtt:/app/data
+        - /run/udev:/run/udev:ro
+    ports:
+        - 8084:8080
+    environment:
+        - TZ=Europe/Brussels
+    devices:
+        - /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_1c2f4549bf45ed119fa5c68f0a86e0b4-if00-port0:/dev/ttyACM0
