@@ -59,3 +59,24 @@ services:
     environment:
         - TZ=Europe/Brussels # Set your timezone
     restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+        - LOG_LEVEL=debug
+        - TZ=Europe/Brussels
+    ports:
+        - 5055:5055
+    volumes:
+        - /opt/stacks/jellyseerr/config:/app/config
+    networks:
+     - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyseerr.rule=Host(`request.02082004.xyz`)"
+      - "traefik.http.routers.jellyseerr.entrypoints=websecure"
+      - "traefik.http.routers.jellyseerr.tls=true"
+      - "traefik.http.routers.jellyseerr.tls.certresolver=letencrypt"
+      - "traefik.http.services.jellyseerr.loadbalancer.server.port=8096"
+    restart: unless-stopped
