@@ -81,6 +81,8 @@ services:
     networks:
      - frontend
      - arr
+    dns:
+      - "1.1.1.1"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyseerr.rule=Host(`request.02082004.xyz`)"
