@@ -1,29 +1,18 @@
 services:
-  traefik:
-    image: traefik
-    container_name: traefik
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
+  cloudflared:
+    image: 'cloudflare/cloudflared:latest'
     environment:
-      - TZ=Europe/Brussels
-      - CF_API_EMAIL=${CF_API_EMAIL}
-      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
-    networks:
-      - frontend
-    ports:
-      - 80:80 # HTTP entryPoints
-      - 443:443 # HTTPS entryPoints
-      - 8080:8080 # Dashbaord WebGui 
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yml:/traefik.yml:ro
-      - traefik:/certs
+      # Don't forget to set this in your Dokploy Environment
+      - 'TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}'
+    network_mode: host
+    restart: unless-stopped
+    command: [
+      "tunnel",
 
-volumes:
-  traefik:
-    name: traefik
+      # More tunnel run parameters here:
+      # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/configure-tunnels/tunnel-run-parameters/
+      "--no-autoupdate",
+      #"--protocol", "http2",
 
-networks:
-  frontend:
-    name: frontend
+      "run"
+    ]
