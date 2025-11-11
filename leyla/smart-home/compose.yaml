@@ -4,11 +4,12 @@ services:
     restart: unless-stopped
     volumes:
       - ha-config:/config
-      - ./files/configuration.yaml:/config/configuration.yaml:ro
-      - ./files/configuration.yaml:/config/template.yaml:ro
-      - ./files/configuration.yaml:/config/scripts.yaml:ro
-      - ./files/configuration.yaml:/config/scenes.yaml:ro
-      - ./files/configuration.yaml:/config/automations.yaml:ro
+      - ./files/configuration.yaml:/config/configuration.yaml
+      - ./files/configuration.yaml:/config/template.yaml
+      - ./files/configuration.yaml:/config/scripts.yaml
+      - ./files/configuration.yaml:/config/scenes.yaml
+      - ./files/configuration.yaml:/config/automations.yaml
+      - ./files/themes:/config/themes
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     healthcheck:
