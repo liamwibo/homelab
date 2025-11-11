@@ -5,6 +5,7 @@ services:
     volumes:
       - ha-config:/config
       - ./files/configuration.yaml:/config/configuration.yaml:ro
+      - ./files/configuration.yaml:/config/template.yaml:ro
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     healthcheck:
