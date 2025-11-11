@@ -3,7 +3,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     restart: unless-stopped
     volumes:
-      - files/configuration.yaml:/config/configuration.yaml
+      - ./files/configuration.yaml:/config/configuration.yaml
       - /opt/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
