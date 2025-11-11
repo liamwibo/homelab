@@ -1,35 +1,32 @@
 services:
+
   homeassistant:
-    image: ghcr.io/home-assistant/home-assistant:stable
+    image: linuxserver/homeassistant:latest
+    container_name: homeassistant
     restart: unless-stopped
+    ports:
+      - 8123:8123
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Brussels
     volumes:
       - /opt/stacks/config/homeassistant:/config
-      - /etc/localtime:/etc/localtime:ro
-      - /run/dbus:/run/dbus:ro
     networks:
+      - frontend
       - smart-home
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8123/"]
-      interval: 60s
-      retries: 5
-      start_period: 300s
-      timeout: 2s
-
-
-
-  mqtt:
-    image: eclipse-mosquitto
-    container_name: mqtt
-    ports:
-      - "1883:1883" #default mqtt port
-      - "9001:9001" #default mqtt port for websockets
-    volumes:
-      - /opt/stacks/mqtt/config:/mosquitto/config:rw
-      -  /opt/stacks/mqtt/data:/mosquitto/data:rw
-      -  /opt/stacks/mqtt/log:/mosquitto/log:rw
-    networks:
-      - smart-home
-    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homeassistant.rule=Host(`hoass.02082004.xyz`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls=true"
+      - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
+      - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
 
   zigbee2mqtt:
     container_name: zigbee2mqtt
@@ -47,6 +44,23 @@ services:
     devices:
         - /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_1c2f4549bf45ed119fa5c68f0a86e0b4-if00-port0:/dev/ttyACM0
 
+
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    ports:
+      - "1883:1883" #default mqtt port
+      - "9001:9001" #default mqtt port for websockets
+    volumes:
+      - /opt/stacks/mqtt/config:/mosquitto/config:rw
+      -  /opt/stacks/mqtt/data:/mosquitto/data:rw
+      -  /opt/stacks/mqtt/log:/mosquitto/log:rw
+    networks:
+      - smart-home
+    restart: unless-stopped
+
+
 networks:
-  smart-home:
+  frontend:
     external: true
+  smart-home:
