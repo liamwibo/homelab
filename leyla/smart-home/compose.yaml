@@ -6,12 +6,15 @@ services:
       - /opt/stacks/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
+    networks:
+      - smart-home
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8123/"]
       interval: 60s
       retries: 5
       start_period: 300s
       timeout: 2s
+
 
 
   mqtt:
@@ -24,6 +27,8 @@ services:
       - /opt/stacks/mqtt/config:/mosquitto/config:rw
       -  /opt/stacks/mqtt/data:/mosquitto/data:rw
       -  /opt/stacks/mqtt/log:/mosquitto/log:rw
+    networks:
+      - smart-home
     restart: unless-stopped
 
   zigbee2mqtt:
@@ -33,6 +38,8 @@ services:
     volumes:
         - /opt/stacks/config/zigbee2mqtt:/app/data
         - /run/udev:/run/udev:ro
+    networks:
+      - smart-home
     ports:
         - 8084:8080
     environment:
