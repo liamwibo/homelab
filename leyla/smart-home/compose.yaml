@@ -6,6 +6,9 @@ services:
       - ha-config:/config
       - ./files/configuration.yaml:/config/configuration.yaml:ro
       - ./files/configuration.yaml:/config/template.yaml:ro
+      - ./files/configuration.yaml:/config/scripts.yaml:ro
+      - ./files/configuration.yaml:/config/scenes.yaml:ro
+      - ./files/configuration.yaml:/config/automations.yaml:ro
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     healthcheck:
