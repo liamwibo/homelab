@@ -15,6 +15,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/radarr:/config
       - /pool/data:/data
+    networks:
+      - arr
   sonarr:
     container_name: sonarr
     image: ghcr.io/hotio/sonarr:latest
@@ -31,6 +33,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sonarr:/config
       - /pool/data:/data
+    networks:
+      - arr
   sabnzbd:
     container_name: sabnzbd
     image: ghcr.io/hotio/sabnzbd:latest
@@ -48,6 +52,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sabnzbd:/config
       - /pool/data/usenet:/data/usenet:rw
+    networks:
+      - arr
 
   profilarr:
     image: santiagosayshey/profilarr:latest # Use :beta for early access to new features
@@ -59,6 +65,8 @@ services:
     environment:
         - TZ=Europe/Brussels # Set your timezone
     restart: unless-stopped
+    networks:
+      - arr
 
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
@@ -72,6 +80,7 @@ services:
         - /opt/stacks/jellyseerr/config:/app/config
     networks:
      - frontend
+     - arr
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyseerr.rule=Host(`request.02082004.xyz`)"
@@ -84,3 +93,5 @@ services:
 networks:
   frontend:
     external: true
+  arr:
+    internal: true
