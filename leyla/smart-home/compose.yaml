@@ -3,10 +3,8 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     restart: unless-stopped
     volumes:
-      # ① enkel bestand uit repo
-      - ./configuration.yaml:/config/configuration.yaml:ro   # ro = read-only (optioneel)
-      # ② anoniem volume voor alles wat HA zelf aanmaakt
       - ha-config:/config
+      - ./files/configuration.yaml:/config/configuration.yaml:ro
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     healthcheck:
@@ -15,6 +13,5 @@ services:
       retries: 5
       start_period: 300s
       timeout: 2s
-
 volumes:
   ha-config:          # wordt aangemaakt door Docker
