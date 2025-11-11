@@ -94,4 +94,4 @@ networks:
   frontend:
     external: true
   arr:
-    internal: true
+    external: true
