@@ -26,4 +26,3 @@ services:
       - "1337:1337"
     depends_on:
       - database
-#fdwawd
