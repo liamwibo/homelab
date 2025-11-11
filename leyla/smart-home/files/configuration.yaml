@@ -62,23 +62,6 @@ mqtt:
       state_class: measurement # Aangepaste state_class
 
 
-google_assistant:
-  project_id: home-assistant-25498
-  service_account: !include SERVICE_ACCOUNT.JSON
-  report_state: true
-  exposed_domains:
-    - switch
-    - light
-  entity_config:
-    switch.kitchen:
-      name: homeassistant
-      aliases:
-        - BRIGHT_LIGHTS
-        - ENTRY_LIGHTS
-    light.living_room:
-      expose: false
-      room: LIVING_ROOM
-
 alert:
   lamp_alert:
     name: fire alarm
