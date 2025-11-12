@@ -28,6 +28,21 @@ services:
           cpus: '0.5'
           memory: 500M
 
+  web:
+    image: nginx
+    environment:
+    - NGINX_PORT=80
+    networks:
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`nginx.02082004.xyz`)"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.routers.nginx.tls.certresolver=letencrypt"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+
+
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: ghcr.io/koenkk/zigbee2mqtt
