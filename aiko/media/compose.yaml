@@ -11,6 +11,14 @@ services:
       - type: bind
         source: /pool/data/media
         target: /data/media
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     networks:
      - frontend
     labels:
