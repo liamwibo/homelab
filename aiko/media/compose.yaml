@@ -21,6 +21,8 @@ services:
               capabilities: [gpu]
     networks:
      - frontend
+    dns:
+      - "1.1.1.1"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.02082004.xyz`)"
