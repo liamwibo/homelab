@@ -34,5 +34,5 @@ services:
 
 # NETWORKS
 networks:
-  public:
+  arr:
     name: arr
