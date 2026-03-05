@@ -1,0 +1,29 @@
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=${TZ}
+      - CF_API_EMAIL=${CF_API_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+    networks:
+      - ${FRONTEND_NETWORK}
+    ports:
+      - ${HTTP_PORT}:80
+      - ${HTTPS_PORT}:443
+      - ${API_PORT}:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${CONFIGDIR}/traefik/traefik.yml:/traefik.yml:ro
+      - traefik:/certs
+
+volumes:
+  traefik:
+    name: traefik
+
+networks:
+  frontend:
+    name: ${FRONTEND_NETWORK}
