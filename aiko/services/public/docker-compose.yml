@@ -1,0 +1,19 @@
+services:
+
+# TRAEFIK-KOP
+  traefik-kop:
+    image: "ghcr.io/jittering/traefik-kop:latest"
+    container_name: traefik-kop
+    restart: unless-stopped
+    environment:
+      - "REDIS_ADDR=${LEYLA_IP}:${REDISPORT}"
+      - "BIND_IP=${AIKO_IP}"
+    networks:
+      - public
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+# NETWORKS
+networks:
+  public:
+    name: public
