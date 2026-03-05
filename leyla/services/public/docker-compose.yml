@@ -29,5 +29,5 @@ volumes:
 
 # NETWORKS
 networks:
-  frontend:
+  public:
     name: ${FRONTEND_NETWORK}
