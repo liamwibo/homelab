@@ -9,7 +9,7 @@ services:
      - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
      - WEBSOCKET_ENABLED=true
      - SIGNUPS_ALLOWED=false
-     - DOMAIN=${VAULTWARDEN_DOMAIN}
+     - DOMAIN=https://${VAULTWARDEN_DOMAIN}
     networks:
       - public
     volumes:
