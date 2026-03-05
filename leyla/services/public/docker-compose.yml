@@ -22,6 +22,16 @@ services:
       - ${CONFIGDIR}/traefik/traefik.yml:/traefik.yml:ro
       - traefik:/certs
 
+# REDIS
+  redis:
+    image: redis
+    container_name: redis
+    restart: unless-stopped
+    networks:
+      - public
+    ports:
+      - 6379:6379
+
 # VOLUMES
 volumes:
   traefik:
