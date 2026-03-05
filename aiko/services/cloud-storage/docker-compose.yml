@@ -1,6 +1,7 @@
 services:
 
-# OCIS  ocis:
+# OCIS
+  ocis:
     image: owncloud/ocis:latest
     container_name: ocis
     restart: unless-stopped
