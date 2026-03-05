@@ -1,4 +1,6 @@
 services:
+
+# RADARR
   radarr:
     image: ghcr.io/hotio/radarr:latest
     container_name: radarr
@@ -15,6 +17,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ${CONFIGDIR}/radarr:/config
       - ${MEDIADIR}:/data
+
+# SONARR
   sonarr:
     image: ghcr.io/hotio/sonarr:latest
     container_name: sonarr
@@ -32,6 +36,7 @@ services:
       - ${CONFIGDIR}/sonarr:/config
       - ${MEDIADIR}:/data
 
+# PROFILARR
   profilarr:
     image: santiagosayshey/profilarr:latest
     container_name: profilarr

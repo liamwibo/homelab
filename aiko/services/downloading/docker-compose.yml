@@ -1,0 +1,24 @@
+services:
+
+# SABNZBD
+  sabnzbd:
+    image: ghcr.io/hotio/sabnzbd:latest
+    container_name: sabnzbd
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - arr
+    ports:
+      - ${SABNZBDPORT}:8080
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIGDIR}/sabnzbd:/config
+      - ${MEDIADIR}/usenet:/data/usenet:rw
+
+# NETWORKS
+networks:
+  arr:
+    external: true
