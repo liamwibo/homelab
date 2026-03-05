@@ -1,0 +1,39 @@
+services:
+
+# OCIS  ocis:
+    image: owncloud/ocis:latest
+    container_name: ocis
+    restart: unless-stopped
+    user: ${PUID}:${PGID}
+    entrypoint:
+      - /bin/sh
+    command: ["-c", "ocis init || true; ocis server"]
+    environment:
+      OCIS_URL: https://${OCIS_DOMAIN}
+      OCIS_LOG_LEVEL: error
+      PROXY_TLS: false
+      OCIS_INSECURE: true
+      PROXY_ENABLE_BASIC_AUTH: false
+      IDM_ADMIN_PASSWORD: "admin"
+      SETTINGS_GRPC_ADDR: 0.0.0.0:9191
+      GATEWAY_GRPC_ADDR: 0.0.0.0:9142
+      STORAGE_USERS_DATA_GATEWAY_URL: http://ocis:9200/data
+    networks:
+      - public
+    ports:
+      - ${OCISPORT}:9200
+    volumes:
+      - ${CONFIGDIR}/ocis:/etc/ocis
+      - ${CLOUDDIR}/ocis:/var/lib/ocis
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ocis.rule=Host(`${OCIS_DOMAIN}`)"
+      - "traefik.http.routers.ocis.entrypoints=websecure"
+      - "traefik.http.routers.ocis.tls=true"
+      - "traefik.http.routers.ocis.tls.certresolver=letencrypt"
+      - "traefik.http.services.ocis.loadbalancer.server.port=${OCISPORT}"
+
+# NETWORKS
+networks:
+  public:
+    external: true
