@@ -1,0 +1,28 @@
+services:
+  home-assistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    privileged: true
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    networks:
+      - ${FRONTEND_NETWORK}
+      - smart-home
+    volumes:
+      - ${CONFIGDIR}/homeassistant/:/config
+      - /run/dbus:/run/dbus:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homeassistant.rule=Host(`hoass.02082004.xyz`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls=true"
+      - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
+      - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
+
+networks:
+  public:
+    name: public
+    external: true
