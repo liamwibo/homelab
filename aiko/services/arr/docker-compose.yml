@@ -13,8 +13,8 @@ services:
       - ${RADARRPORT}:7878
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${CONFIGDIR}:/config
-      - ${DATADIR}:/data
+      - ${CONFIGDIR}/radarr:/config
+      - ${DATADIR}/radarr:/data
   sonarr:
     container_name: sonarr
     hostname: sonarr.internal
@@ -29,8 +29,8 @@ services:
       - arr
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${CONFIGDIR}:/config
-      - ${DATADIR}:/data
+      - ${CONFIGDIR}/sonarr:/config
+      - ${DATADIR}/sonarr:/data
 
 # NETWORKS
 networks:
