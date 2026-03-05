@@ -30,4 +30,4 @@ services:
 # NETWORKS
 networks:
   public:
-    extenral: true
+    external: true
