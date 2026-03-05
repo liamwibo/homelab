@@ -14,7 +14,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${CONFIGDIR}/radarr:/config
-      - ${DATADIR}/radarr:/data
+      - ${MEDIADIR}:/data
   sonarr:
     image: ghcr.io/hotio/sonarr:latest
     container_name: sonarr
@@ -30,7 +30,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${CONFIGDIR}/sonarr:/config
-      - ${DATADIR}/sonarr:/data
+      - ${MEDIADIR}:/data
 
   profilarr:
     image: santiagosayshey/profilarr:latest
