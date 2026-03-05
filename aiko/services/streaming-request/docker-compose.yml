@@ -11,6 +11,7 @@ services:
     networks:
       - public
       - media
+      - arr
     ports:
       - ${JELLYSEERRPORT}:5055
     volumes:
@@ -28,4 +29,6 @@ networks:
   public:
     external: true
   media:
+    external: true
+  arr:
     external: true
