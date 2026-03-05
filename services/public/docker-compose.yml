@@ -1,4 +1,6 @@
 services:
+
+# TRAEFIK
   traefik:
     image: traefik
     container_name: traefik
@@ -20,10 +22,12 @@ services:
       - ${CONFIGDIR}/traefik/traefik.yml:/traefik.yml:ro
       - traefik:/certs
 
+# VOLUMES
 volumes:
   traefik:
     name: traefik
 
+# NETWORKS
 networks:
   frontend:
     name: ${FRONTEND_NETWORK}

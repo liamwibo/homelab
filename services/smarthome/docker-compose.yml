@@ -1,4 +1,6 @@
 services:
+
+# HOMEASSISTANT
   home-assistant:
     image: ghcr.io/home-assistant/home-assistant:stable
     container_name: homeassistant
@@ -22,6 +24,36 @@ services:
       - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
       - "traefik.http.services.homeassistant.loadbalancer.server.port=${HOMEASSISTANT_PORT}"
 
+# ZIGBEE
+  zigbee2mqtt:
+    image: ghcr.io/koenkk/zigbee2mqtt
+    container_name: zigbee2mqtt
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    networks:
+      - smart-home
+    volumes:
+      - ${CONFIGDIR}/zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      - ${ZIGBEE2MQTT_PORT}:8080
+    devices:
+      - ${ZIGBEESTICKLOCATION}:/dev/ttyUSB0
+
+# MQTT
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    restart: unless-stopped
+    networks:
+      - smart-home
+    volumes:
+      - ${CONFIGDIR}/mqtt:/mosquitto/config:rw
+      - ${DATADIR}/mqtt:/mosquitto/data:rw
+      - ${LOGDIR}/mqtt:/mosquitto/log:rw
+
+# NETWORKS
 networks:
   public:
     name: public
