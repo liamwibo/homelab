@@ -53,8 +53,8 @@ services:
       - ${DATADIR}/mqtt:/mosquitto/data:rw
       - ${LOGDIR}/mqtt:/mosquitto/log:rw
     ports:
-      - "1883:1883"
-      - "9001:9001"
+      - "${MQTTPORT}:1883"
+      - "${MQTTWEBSOCKETPORT}:9001"
 
 # NETWORKS
 networks:
