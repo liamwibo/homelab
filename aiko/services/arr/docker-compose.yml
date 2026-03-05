@@ -32,20 +32,20 @@ services:
       - ${CONFIGDIR}/sonarr:/config
       - ${DATADIR}/sonarr:/data
 
-    profilarr:
-      image: santiagosayshey/profilarr:latest
-      container_name: profilarr
-      restart: unless-stopped
-      environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-        - TZ=${TZ}
-      networks:
-        - arr
-      ports:
-        - "${PROFILARRPORT}:6868"
-      volumes:
-        - ${CONFIGDIR}/profilarr:/config
+  profilarr:
+    image: santiagosayshey/profilarr:latest
+    container_name: profilarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - arr
+    ports:
+      - "${PROFILARRPORT}:6868"
+    volumes:
+      - ${CONFIGDIR}/profilarr:/config
 
 # NETWORKS
 networks:
