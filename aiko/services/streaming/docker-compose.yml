@@ -12,6 +12,7 @@ services:
       - JELLYFIN_PublishedServerUrl=https://${JELLYFIN_DOMAIN}
     networks:
       - public
+      - media
     ports:
       - ${JELLYFIN_PORT}:8096
       - 7359:7359/udp
@@ -32,3 +33,5 @@ services:
 networks:
   public:
     external: true
+  media:
+    name: media

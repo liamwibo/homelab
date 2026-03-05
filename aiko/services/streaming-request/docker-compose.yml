@@ -10,6 +10,7 @@ services:
       - TZ=${TZ}
     networks:
       - public
+      - media
     ports:
       - ${JELLYSEERRPORT}:5055
     volumes:
@@ -25,4 +26,6 @@ services:
 # NETWORKS
 networks:
   public:
+    external: true
+  media:
     external: true
