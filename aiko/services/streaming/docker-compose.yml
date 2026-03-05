@@ -13,6 +13,7 @@ services:
     networks:
       - public
     ports:
+      - ${JELLYFIN_PORT}:8096
       - 7359:7359/udp
       - 1900:1900/udp
     volumes:
