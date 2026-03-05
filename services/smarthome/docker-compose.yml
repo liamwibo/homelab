@@ -16,13 +16,15 @@ services:
       - /run/dbus:/run/dbus:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homeassistant.rule=Host(`hoass.02082004.xyz`)"
+      - "traefik.http.routers.homeassistant.rule=Host(`${HOMEASSISTANT_DOMAIN}`)"
       - "traefik.http.routers.homeassistant.entrypoints=websecure"
       - "traefik.http.routers.homeassistant.tls=true"
       - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
-      - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
+      - "traefik.http.services.homeassistant.loadbalancer.server.port=${HOMEASSISTANT_PORT}"
 
 networks:
   public:
     name: public
     external: true
+  smart-home:
+    name: smart-home
