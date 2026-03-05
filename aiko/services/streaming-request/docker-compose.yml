@@ -1,0 +1,28 @@
+services:
+
+# JELLYSEERR
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TZ}
+    networks:
+      - public
+    ports:
+      - ${JELLYSEERRPORT}:5055
+    volumes:
+      - ${CONFIGDIR}/jellyseerr:/app/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyseerr.rule=Host(`${JELLYSEERR_DOMAIN}`)"
+      - "traefik.http.routers.jellyseerr.entrypoints=websecure"
+      - "traefik.http.routers.jellyseerr.tls=true"
+      - "traefik.http.routers.jellyseerr.tls.certresolver=letencrypt"
+      - "traefik.http.services.jellyseerr.loadbalancer.server.port=${JELLYSEERRPORT}"
+
+# NETWORKS
+networks:
+  public:
+    external: true
