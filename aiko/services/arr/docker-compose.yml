@@ -16,21 +16,36 @@ services:
       - ${CONFIGDIR}/radarr:/config
       - ${DATADIR}/radarr:/data
   sonarr:
-    container_name: sonarr
-    hostname: sonarr.internal
     image: ghcr.io/hotio/sonarr:latest
-    ports:
-      - ${SONARRPORT}:8989
+    container_name: sonarr
+    restart: unless-stopped
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     networks:
       - arr
+    ports:
+      - ${SONARRPORT}:8989
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${CONFIGDIR}/sonarr:/config
       - ${DATADIR}/sonarr:/data
+
+    profilarr:
+      image: santiagosayshey/profilarr:latest
+      container_name: profilarr
+      restart: unless-stopped
+      environment:
+        - PUID=${PUID}
+        - PGID=${PGID}
+        - TZ=${TZ}
+      networks:
+        - arr
+      ports:
+        - "${PROFILARRPORT}:6868"
+      volumes:
+        - ${CONFIGDIR}/profilarr:/config
 
 # NETWORKS
 networks:
