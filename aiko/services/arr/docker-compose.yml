@@ -1,0 +1,37 @@
+services:
+  radarr:
+    image: ghcr.io/hotio/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - arr
+    ports:
+      - ${RADARRPORT}:7878
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIGDIR}:/config
+      - ${DATADIR}:/data
+  sonarr:
+    container_name: sonarr
+    hostname: sonarr.internal
+    image: ghcr.io/hotio/sonarr:latest
+    ports:
+      - ${SONARRPORT}:8989
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - arr
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIGDIR}:/config
+      - ${DATADIR}:/data
+
+networks:
+  arr:
+  name: arr
