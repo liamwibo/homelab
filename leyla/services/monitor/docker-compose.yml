@@ -4,7 +4,7 @@ services:
     container_name: dozzle
     restart: unless-stopped
     environment:
-      - DOZZLE_REMOTE_AGENT=192.168.50.3:7007
+      - DOZZLE_REMOTE_AGENT=${LEYLA_IP}:${DOZZLE_AGENT_PORT}
     ports:
       - ${DOZZLEPORT}:8080
     volumes:
