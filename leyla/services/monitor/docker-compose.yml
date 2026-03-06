@@ -2,6 +2,9 @@ services:
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
+    restart: unless-stopped
+    environment:
+      - DOZZLE_REMOTE_AGENT=192.168.50.3:7007
     ports:
       - ${DOZZLEPORT}:8080
     volumes:
