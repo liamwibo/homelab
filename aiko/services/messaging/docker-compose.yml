@@ -1,0 +1,43 @@
+services:
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: synapse
+    restart: unless-stopped
+    environment:
+      - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+    volumes:
+      - ${DATADIR}/synapse:/data
+    depends_on:
+      - postgres
+    ports:
+      - "${SYNAPSEPORT}:8008"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.synapse.rule=Host(`${SYNAPSE_DOMAIN}`)"
+      - "traefik.http.routers.synapse.entrypoints=websecure"
+      - "traefik.http.routers.synapse.tls=true"
+      - "traefik.http.routers.synapse.tls.certresolver=letencrypt"
+      - "traefik.http.services.synapse.loadbalancer.server.port=${SYNAPSEPORT}"
+    networks:
+      - matrix
+      - public
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: synapse-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=synapse
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=C
+    volumes:
+      - ${DATADIR}/postgres:/var/lib/postgresql/data
+    networks:
+      - matrix
+
+networks:
+  matrix:
+    driver: bridge
+  public:
+    external: true
