@@ -36,6 +36,18 @@ services:
     networks:
       - matrix
 
+  element:
+    image: vectorim/element-web:latest
+    container_name: element
+    restart: unless-stopped
+    volumes:
+      - ${CONFIGDIR}/element/element-config.json:/app/config.json
+    networks:
+      - matrix
+      - public
+
+
+
 networks:
   matrix:
     driver: bridge
