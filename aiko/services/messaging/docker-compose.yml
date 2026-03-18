@@ -55,6 +55,12 @@ services:
       - matrix
       - public
 
+  mautrix-whatsapp:
+    image: dock.mau.dev/mautrix/whatsapp:latest
+    restart: unless-stopped
+    volumes:
+      - ${DATADIR}/whatsapp-data:/data
+
 
 
 networks:
