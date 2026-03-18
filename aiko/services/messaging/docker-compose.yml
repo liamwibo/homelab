@@ -40,8 +40,17 @@ services:
     image: vectorim/element-web:latest
     container_name: element
     restart: unless-stopped
+    ports:
+      - "${ELEMENTPORT}:80"
     volumes:
       - ${CONFIGDIR}/element/element-config.json:/app/config.json
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.element.rule=Host(`${ELEMENT_DOMAIN}`)"
+      - "traefik.http.routers.element.entrypoints=websecure"
+      - "traefik.http.routers.element.tls=true"
+      - "traefik.http.routers.element.tls.certresolver=letencrypt"
+      - "traefik.http.services.element.loadbalancer.server.port=${ELEMENTPORT}"
     networks:
       - matrix
       - public
