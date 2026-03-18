@@ -63,6 +63,18 @@ services:
     networks:
       - matrix
 
+  whatsapp-db:
+    image: postgres:15-alpine
+    container_name: whatsapp-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=whatsapp
+      - POSTGRES_PASSWORD=WhatsAppPass123
+      - POSTGRES_DB=whatsapp
+    volumes:
+      - ${DATADIR}/whatsapp-db:/var/lib/postgresql/data
+    networks:
+      - matrix
 
 networks:
   matrix:
