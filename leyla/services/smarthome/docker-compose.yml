@@ -49,7 +49,7 @@ services:
 networks:
   # This key must match the string inside ${FRONTEND_NETWORK} exactly
   # If ${FRONTEND_NETWORK} is "proxy", this key becomes "proxy"
-  ${FRONTEND_NETWORK}:
+  public:
     external: true
   smart-home:
     name: smart-home
