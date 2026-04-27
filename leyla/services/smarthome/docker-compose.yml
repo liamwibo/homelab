@@ -1,51 +1,55 @@
 services:
-  home-assistant:
-    image: ghcr.io/home-assistant/home-assistant:stable
-    container_name: homeassistant
-    privileged: true
-    restart: unless-stopped
-    environment:
-      - TZ=${TZ}
-    networks:
-      - ${FRONTEND_NETWORK}
-      - smart-home
-    volumes:
-      - ${CONFIGDIR}/homeassistant:/config
-      - /run/dbus:/run/dbus:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.homeassistant.rule=Host(`${HOMEASSISTANT_DOMAIN}`)"
-      - "traefik.http.routers.homeassistant.entrypoints=websecure"
-      - "traefik.http.routers.homeassistant.tls=true"
-      - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
-      - "traefik.http.services.homeassistant.loadbalancer.server.port=${HOMEASSISTANT_PORT}"
+  home-assistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    privileged: true
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      # Removed PUID/PGID as the official HA image generally runs as root/privileged
+    networks:
+      - ${FRONTEND_NETWORK}
+      - smart-home
+    volumes:
+      - ${CONFIGDIR}/homeassistant:/config
+      - /run/dbus:/run/dbus:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homeassistant.rule=Host(`${HOMEASSISTANT_DOMAIN}`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls=true"
+      - "traefik.http.routers.homeassistant.tls.certresolver=letencrypt"
+      - "traefik.http.services.homeassistant.loadbalancer.server.port=${HOMEASSISTANT_PORT}"
 
-  zigbee2mqtt:
-    image: ghcr.io/koenkk/zigbee2mqtt
-    container_name: zigbee2mqtt
-    restart: unless-stopped
-    environment:
-      - TZ=${TZ}
-    networks:
-      - smart-home
-    volumes:
-      - ${CONFIGDIR}/zigbee2mqtt:/app/data
-      - /run/udev:/run/udev:ro
-    ports:
-      - ${ZIGBEE2MQTT_PORT}:8080
-    devices:
-      - ${ZIGBEESTICKLOCATION}:/dev/ttyUSB0
+  zigbee2mqtt:
+    image: ghcr.io/koenkk/zigbee2mqtt
+    container_name: zigbee2mqtt
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    networks:
+      - smart-home
+    volumes:
+      - ${CONFIGDIR}/zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      - ${ZIGBEE2MQTT_PORT}:8080
+    devices:
+      - ${ZIGBEESTICKLOCATION}:/dev/ttyUSB0
 
-  mqtt:
-    container_name: mqtt
-    ports:
-      - 1883:1883
-    image: emqx/nanomq:latest
-    networks:
-      - smart-home
+  mqtt:
+    image: emqx/nanomq:latest
+    container_name: mqtt
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+    networks:
+      - smart-home
 
 networks:
-  ${FRONTEND_NETWORK}:
-    external: true
-  smart-home:
-    name: smart-home
+  # This key must match the string inside ${FRONTEND_NETWORK} exactly
+  # If ${FRONTEND_NETWORK} is "proxy", this key becomes "proxy"
+  ${FRONTEND_NETWORK}:
+    external: true
+  smart-home:
+    name: smart-home
