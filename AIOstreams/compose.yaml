@@ -10,6 +10,7 @@ services:
       - "traefik.http.routers.aiostreams.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.aiostreams.tls=true"
       - "traefik.http.routers.aiostreams.tls.certresolver=letsencrypt"
+      - "dit is een test"
     env_file:
       - .env
     volumes:
