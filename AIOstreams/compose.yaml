@@ -1,0 +1,17 @@
+services:
+  aiostreams:
+    image: ghcr.io/viren070/aiostreams:latest
+    container_name: aiostreams
+    restart: unless-stopped
+    ports:
+      - 3030:3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.aiostreams.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.aiostreams.tls=true"
+      - "traefik.http.routers.aiostreams.tls.certresolver=letsencrypt"
+    env_file:
+      - .env
+    volumes:
+      - /opt/appdata/aiostreams/data:/app/data
+
